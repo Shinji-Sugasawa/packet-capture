@@ -19,3 +19,12 @@ makdir %sub_dir%
 @rem キャプチャするインターフェイス情報を取得
 set /p interface_id = "キャプチャしたいインターフェイスの数字を入力してください :"
 @echo.
+
+@rem 保存間隔を分単位で指定
+set /p time_interval="保存間隔を分単位で指定してください :"
+set /a "time_interval *= 60"
+@echo.
+
+@rem パケットのキャプチャを開始
+@echo キャプチャしたパケットを保存しています。Ctrl＋Cで終了します。
+"C:\Program Files\Wireshark\dumpcap.exe" -i %interface_id% -b duration:%time_interval% -w %sub_dir%\packet.pcapng"
